@@ -1,0 +1,23 @@
+class Solution {
+    public List<String> letterCasePermutation(String s) {
+        List<String> result = new ArrayList<>();
+        backtrack(new StringBuilder(s), 0, result);
+        return result;
+    }
+
+    private void backtrack(StringBuilder sb, int i, List<String> result) {
+        if (i == sb.length()) {
+            result.add(sb.toString());
+            return;
+        }
+
+        if (Character.isDigit(sb.charAt(i))) {
+            backtrack(sb, i + 1, result);
+        } else {
+            sb.setCharAt(i, Character.toLowerCase(sb.charAt(i)));
+            backtrack(sb, i + 1, result);
+            sb.setCharAt(i, Character.toUpperCase(sb.charAt(i)));
+            backtrack(sb, i + 1, result);
+        }
+    }
+}
